@@ -2,7 +2,7 @@ import bpy, random
 
 fnt = bpy.data.fonts.load('C:\\Users\\taho_\\OneDrive\\Belgeler\\BlenderScripts\\CarbonBold W00 Regular.ttf')
 scene = bpy.context.scene
-brief = "Akinci UCAV Reconnisance Mission.\n\nBatman/Türkiye 23:30.\n\nTabriz/Iran 02:36.\n\nHelicopter detected on remote mountainous region of Iran’s northwest.\n\nTürkiye 06:45."
+brief = "Akinci UCAV Reconnaissance Mission.\n\nBatman/Türkiye 23:30.\n\nTabriz/Iran 02:36.\n\nHelicopter detected on remote mountainous region of Iran’s northwest.\n\nTürkiye 06:45."
 briefTextObj = None
 UpperLetterASCIIStart = 65
 LowerLetterASCIIStart = 97
@@ -17,16 +17,16 @@ def TextUpdate(scene):
     global briefTextObj
     global transitionStarted, fadeIndexOrder, fadeIndex
     global_frame_counter += 1
-    # BELOW CODE BLOCK REMOVES LETTERS RANDOMLY FROM THE BRIEF TEXT
-    # if transitionStarted:
-    #     currentState = list(briefTextObj.data.body)
-    #     currentState[fadeIndexOrder[fadeIndex]] = ' '
-    #     briefTextObj.data.body = "".join(currentState)
-    #     fadeIndex+=1
-    #     return
-    # if brief in briefTextObj.data.body:
-    #     transitionStarted = True
-    #     return
+    
+    if transitionStarted:
+        currentState = list(briefTextObj.data.body)
+        currentState[fadeIndexOrder[fadeIndex]] = ' '
+        briefTextObj.data.body = "".join(currentState)
+        fadeIndex+=1
+        return
+    if brief in briefTextObj.data.body:
+        transitionStarted = True
+        return
     length = len(briefTextObj.data.body)
     if length == 0:
         briefTextObj.data.body = f"{brief[0]}"
